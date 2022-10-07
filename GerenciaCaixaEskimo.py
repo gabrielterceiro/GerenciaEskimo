@@ -31,6 +31,8 @@ while True:
 
 while True:
     aberturaCaixa = input('Valor de abertura: ')
+    if ',' in aberturaCaixa:
+        aberturaCaixa = aberturaCaixa.replace(',','.')
     try:
         val = float(aberturaCaixa)
         break;
@@ -39,6 +41,8 @@ while True:
 
 while True:
     vendasDinheiroCaixa = input('Vendas em dinheiro: ')
+    if ',' in vendasDinheiroCaixa:
+        vendasDinheiroCaixa = vendasDinheiroCaixa.replace(',','.')
     try:
         val = float(vendasDinheiroCaixa)
         break;
@@ -47,6 +51,8 @@ while True:
 
 while True:
     vendasCartaoCredCaixa = input('Vendas em cartão crédito: ')
+    if ',' in vendasCartaoCredCaixa:
+        vendasCartaoCredCaixa = vendasCartaoCredCaixa.replace(',','.')
     try:
         val = float(vendasCartaoCredCaixa)
         break;
@@ -55,6 +61,8 @@ while True:
 
 while True:
     vendasCartaoDebCaixa = input('Vendas em cartão debito: ')
+    if ',' in vendasCartaoDebCaixa:
+        vendasCartaoDebCaixa = vendasCartaoDebCaixa.replace(',','.')
     try:
         val = float(vendasCartaoDebCaixa)
         break;
@@ -63,6 +71,8 @@ while True:
 
 while True:
     vendasPixCaixa = input('Vendas em pix: ')
+    if ',' in vendasPixCaixa:
+        vendasPixCaixa = vendasPixCaixa.replace(',','.')
     try:
         val = float(vendasPixCaixa)
         break;
@@ -71,6 +81,8 @@ while True:
 
 while True:
     vendasIfoodCaixa = input('Vendas em ifood: ')
+    if ',' in vendasIfoodCaixa:
+        vendasIfoodCaixa = vendasIfoodCaixa.replace(',','.')
     try:
         val = float(vendasIfoodCaixa)
         break;
@@ -79,6 +91,8 @@ while True:
 
 while True:
     sangriaCaixa = input('Sangria: ')
+    if ',' in sangriaCaixa:
+        sangriaCaixa = sangriaCaixa.replace(',','.')
     try:
         val = float(sangriaCaixa)
         break;
@@ -87,6 +101,8 @@ while True:
 
 while True:
     suprimentoCaixa = input('Suprimento: ')
+    if ',' in suprimentoCaixa:
+        suprimentoCaixa = suprimentoCaixa.replace(',','.')
     try:
         val = float(suprimentoCaixa)
         break;
@@ -97,6 +113,8 @@ subTotalCaixa = float(aberturaCaixa) + float(vendasDinheiroCaixa) - float(sangri
 
 while True:
     fechamentoCaixa = input('Fechamento: ')
+    if ',' in fechamentoCaixa:
+        fechamentoCaixa = fechamentoCaixa.replace(',','.')
     try:
         val = float(fechamentoCaixa)
         break;
