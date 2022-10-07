@@ -41,7 +41,7 @@
  [],
  False,
  False,
- 1665174112,
+ 1665174913,
  [('run.exe',
    'D:\\Users\\gcaro\\anaconda3\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit\\run.exe',
    'EXECUTABLE')])
