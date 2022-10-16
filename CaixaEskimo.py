@@ -1,8 +1,8 @@
+import CaixaInsert
 import Estatisticas
 import Miscelaneous as misc
-import TotalVendas
-import CaixaInsert
 import QuebraCaixa
+import TotalVendas
 
 def main():
     while True:

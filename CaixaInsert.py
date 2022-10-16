@@ -178,17 +178,8 @@ def insertCaixaWithPdf():
         if text:
             os.remove(file)
 
-
-        dateCaixaRe = re.compile(r'\w{4} \w{2} \w{5}[:] (.*)')
-        aberturaCaixaRe = re.compile(r'(\d{0,3}[.]{0,}\d{1,3}[,]\d{2})\D{2} \b[A]\w{7}\b')
-        vendasDinheiroRe = re.compile(r'\b[A-Z]{8}\b (\d{0,3}[.]{0,}\d{1,3}[,]\d{2})')
-        vendasCcRe = re.compile(r'\b[A-Z]{6} [A-Z]{7}\b (\d{0,3}[.]{0,}\d{1,3}[,]\d{2})')
-        vendasCdRe = re.compile(r'\b[A-Z]{6} [A-Z]{6}\b (\d{0,3}[.]{0,}\d{1,3}[,]\d{2})')
-        vendasPixRe = re.compile(r'\b[A-Z]{3}\b (\d{0,3}[.]{0,}\d{1,3}[,]\d{2})')
-        vendasIfoodRe = re.compile(r'\b[I][A-Z]{4}\b (\d{0,3}[.]{0,}\d{1,3}[,]\d{2})')
-        sangriaCaixaRe = re.compile(r'(\d{0,3}[.]{0,}\d{1,3}[,]\d{2})\D{2} \b[S]\w{6}\b')
-        suprimentoCaixaRe = re.compile(r'(\d{0,3}[.]{0,}\d{1,3}[,]\d{2})\D{2} \b[S]\w{9}\b')
-        fechamentoCaixaRe = re.compile(r'(\d{0,3}[.]{0,}\d{1,3}[,]\d{2})\D{2} [F]\w{9}')
+        dt_re = re.compile(r'\d{2}[/]\d{2}[/]\d{4}')
+        vl_re = re.compile(r'\d{0,}[.]{0,}\d{1,3}[,]\d{2}')
 
         listaValores = {'data' : '',\
             'abertura' : '0',\
@@ -200,28 +191,31 @@ def insertCaixaWithPdf():
             'sangria' : '0',\
             'suprimento' : '0',\
             'fechamento' : '0'}
+
         for line in text.split('\n'):
-            if dateCaixaRe.search(line):
-                listaValores['data'] = dateCaixaRe.search(line).group(1)
-            if aberturaCaixaRe.search(line):
-                listaValores['abertura'] = aberturaCaixaRe.search(line).group(1)
-            if vendasDinheiroRe.search(line):
-                listaValores['vendasDinheiro'] = vendasDinheiroRe.search(line).group(1)
-            if vendasCcRe.search(line):
-                listaValores['vendasCc'] = vendasCcRe.search(line).group(1)
-            if vendasCdRe.search(line):
-                listaValores['vendasCd'] = vendasCdRe.search(line).group(1)
-            if vendasPixRe.search(line):
-                listaValores['vendasPix'] = vendasPixRe.search(line).group(1)
-            if vendasIfoodRe.search(line):
-                listaValores['vendasIfood'] = vendasIfoodRe.search(line).group(1)
-            if sangriaCaixaRe.search(line):
-                listaValores['sangria'] = sangriaCaixaRe.search(line).group(1)
-            if suprimentoCaixaRe.search(line):
-                listaValores['suprimento'] = suprimentoCaixaRe.search(line).group(1)
-            if fechamentoCaixaRe.search(line):
-                listaValores['fechamento'] = fechamentoCaixaRe.search(line).group(1)
-    
+            input(line)
+            if 'Data' in line:
+                listaValores['data'] = dt_re.search(line).group(0)
+            if 'Abertura' in line:
+                listaValores['abertura'] = vl_re.search(line).group(0)
+            if 'DINHEIRO' in line:
+                listaValores['vendasDinheiro'] = vl_re.search(line).group(0)
+                print(line)
+            if 'CARTAO CREDITO' in line:
+                listaValores['vendasCc'] = vl_re.search(line).group(0)
+            if 'CARTAO DEBITO' in line:
+                listaValores['vendasCd'] = vl_re.search(line).group(0)
+            if 'PIX' in line:
+                listaValores['vendasPix'] = vl_re.search(line).group(0)
+            if 'IFOOD' in line:
+                listaValores['vendasIfood'] = vl_re.search(line).group(0)
+            if 'Sangria' in line:
+                listaValores['sangria'] = vl_re.search(line).group(0)
+            if 'Suprimento' in line:
+                listaValores['suprimento'] = vl_re.search(line).group(0)
+            if 'Fechamento' in line:
+                listaValores['fechamento'] = vl_re.search(line).group(0)
+
         listaValores['data'] = misc.convertDtFormat(listaValores['data'])
         listaValores['abertura'] = misc.removeDot(listaValores['abertura'])
         listaValores['vendasDinheiro'] = misc.removeDot(listaValores['vendasDinheiro'])
@@ -234,4 +228,5 @@ def insertCaixaWithPdf():
         subtotal = str(int(listaValores['abertura']) + int(listaValores['vendasDinheiro']) - int(listaValores['sangria']) + int(listaValores['suprimento']))
         listaValores['fechamento'] = misc.removeDot(listaValores['fechamento'])
         quebraCaixa = str(int(listaValores['fechamento']) - int(subtotal))
+        
         caixaInsert(listaValores['data'], listaValores['abertura'], listaValores['vendasDinheiro'], listaValores['vendasCc'], listaValores['vendasCd'], listaValores['vendasPix'], listaValores['vendasIfood'], listaValores['sangria'], listaValores['suprimento'], subtotal, listaValores['fechamento'], quebraCaixa)
