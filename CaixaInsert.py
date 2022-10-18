@@ -13,7 +13,7 @@ c = con.cursor()
 #função para inserir dados
 def caixaInsert(vDate, vAbertura, vVendas_dinheiro, vVendas_cc, vVendas_cd, vVendas_pix, vVendas_ifood, vSangria, vSuprimento, vSub_total, vFechamento, vQuebra_caixa):
     try:
-        c.execute('INSERT INTO tb_caixa (date, abertura, vendas_dinheiro, vendas_cc, vendas_cd, vendas_pix, vendas_ifood, sangria, suprimento, sub_total, fechamento, quebra_caixa) values(strftime(\'%s\', ?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (vDate, vAbertura, vVendas_dinheiro, vVendas_cc, vVendas_cd, vVendas_pix, vVendas_ifood, vSangria, vSuprimento, vSub_total, vFechamento, vQuebra_caixa))
+        c.execute('INSERT INTO tb_caixa (date, abertura, vendas_dinheiro, vendas_cc, vendas_cd, vendas_pix, vendas_ifood, sangria, suprimento, sub_total, fechamento, quebra_caixa) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (vDate, vAbertura, vVendas_dinheiro, vVendas_cc, vVendas_cd, vVendas_pix, vVendas_ifood, vSangria, vSuprimento, vSub_total, vFechamento, vQuebra_caixa))
     except:
         input()
     con.commit()
@@ -157,7 +157,7 @@ def registroCaixa():
     while True:
         confirm = input('Confirma os valores? (Y/N) ')
         if confirm == 'y':
-            dataCaixa = misc.convertDtFormat(dataCaixa)
+            dataCaixa = int(datetime.datetime.timestamp(misc.convertDtFormat(dataCaixa)))
             caixaInsert(dataCaixa, aberturaCaixa, vendasDinheiroCaixa, vendasCartaoCredCaixa, vendasCartaoDebCaixa, vendasPixCaixa, vendasIfoodCaixa, sangriaCaixa, suprimentoCaixa, subTotalCaixa, fechamentoCaixa, quebraCaixa)
             input('Aperte ENTER para recomeçar')
             misc.clearConsole()
@@ -193,14 +193,12 @@ def insertCaixaWithPdf():
             'fechamento' : '0'}
 
         for line in text.split('\n'):
-            input(line)
             if 'Data' in line:
                 listaValores['data'] = dt_re.search(line).group(0)
             if 'Abertura' in line:
                 listaValores['abertura'] = vl_re.search(line).group(0)
             if 'DINHEIRO' in line:
                 listaValores['vendasDinheiro'] = vl_re.search(line).group(0)
-                print(line)
             if 'CARTAO CREDITO' in line:
                 listaValores['vendasCc'] = vl_re.search(line).group(0)
             if 'CARTAO DEBITO' in line:
@@ -216,7 +214,7 @@ def insertCaixaWithPdf():
             if 'Fechamento' in line:
                 listaValores['fechamento'] = vl_re.search(line).group(0)
 
-        listaValores['data'] = misc.convertDtFormat(listaValores['data'])
+        listaValores['data'] = int(datetime.datetime.timestamp(misc.convertDtFormat(listaValores['data'])))
         listaValores['abertura'] = misc.removeDot(listaValores['abertura'])
         listaValores['vendasDinheiro'] = misc.removeDot(listaValores['vendasDinheiro'])
         listaValores['vendasCc'] = misc.removeDot(listaValores['vendasCc'])

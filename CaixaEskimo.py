@@ -3,6 +3,8 @@ import Estatisticas
 import Miscelaneous as misc
 import QuebraCaixa
 import TotalVendas
+import CaixaDelete
+
 
 def main():
     while True:
@@ -12,7 +14,8 @@ def main():
         print('3: Dias com quebra de caixa')
         print('4: Vendas por dia')
         print('5: Estatísticas')
-        print('6: Sair')
+        print('6: Remover Registro')
+        print('7: Sair')
         
         try:
             option = int(input('Opção desejada: '))
@@ -32,9 +35,12 @@ def main():
             misc.clearConsole()
             TotalVendas.ifFilter()
         elif option == 5:
-            misc.clearConsoleclearConsole()
+            misc.clearConsole()
             Estatisticas.printStatistics()
         elif option == 6:
+            misc.clearConsole()
+            CaixaDelete.removeData()
+        elif option == 7:
             break
         else:
             print('opção inexistente')

@@ -1,4 +1,5 @@
 import os
+import datetime
 
 def toCurrency(value):
     value = float(value)
@@ -20,10 +21,12 @@ def removeDot(input):
 
 #função paa converter data dd/mm/yyyy para yyyy-mm-dd
 def convertDtFormat(unformattedDt):
-    day = unformattedDt[0] + unformattedDt[1]
+    '''day = unformattedDt[0] + unformattedDt[1]
     month = unformattedDt[3] + unformattedDt[4]
     year = unformattedDt[6] + unformattedDt[7] + unformattedDt[8] + unformattedDt[9]
-    formattedDt = year + '-' + month + '-' + day
+    formattedDt = datetime.datetime(int(year), int(month), int(day))'''
+    formattedDt = datetime.datetime.strptime(unformattedDt, '%d/%m/%Y')
+    
     return formattedDt
 
 def clearConsole():
