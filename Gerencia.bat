@@ -1,0 +1,1 @@
+D:/Users/Gabriel/anaconda3/python.exe d:/GerenciaEskimo/main.py

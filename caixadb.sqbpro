@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="D:/GerenciaEskimo/caixadb.db" readonly="0" foreign_keys="" case_sensitive_like="" temp_store="" wal_autocheckpoint="" synchronous=""/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2289"/><column_width id="4" width="0"/></tab_structure><tab_browse><current_table name="0,0:"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">SELECT tb_produto.nm_picole AS Produto, SUM(tb_venda.qt_prod) AS Qtd, SUM(tb_venda.vl_prod) AS Valor, SUM(tb_venda.vl_prod)*0.2 AS Lucro
+FROM tb_venda, tb_produto
+WHERE tb_venda.cd_prod = tb_produto.cd_picole
+GROUP BY tb_produto.nm_picole
+ORDER BY Valor DESC</sql><current_tab id="0"/></tab_sql></sqlb_project>
